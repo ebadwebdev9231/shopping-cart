@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useShoppingCart } from "../context/ShoppingCartContext";
+import { MdShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
+  const { openCart, cartQuantity } = useShoppingCart();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -22,10 +25,15 @@ const Navbar = () => {
           </li>
         </ul>
         <div>
-          <button className="btn btn-outline-success position-relative">
-            cart
-            <div className="cart-counter">4</div>
-          </button>
+          {cartQuantity > 0 && (
+            <button
+              className="btn btn-outline-success position-relative rounded-circle fs-4"
+              onClick={openCart}
+            >
+              <MdShoppingCart />
+              <div className="cart-counter">{cartQuantity}</div>
+            </button>
+          )}
         </div>
       </div>
     </nav>
